@@ -119,7 +119,7 @@ namespace oxygine
         alcMakeContextCurrent(0);
 #endif
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || defined(TARGET_OS_SAILFISH)
         alcSuspendContext(_context);
         alcMakeContextCurrent(0);
 #endif
@@ -138,7 +138,7 @@ namespace oxygine
         alcProcessContext(_context);
 #endif
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE || defined(TARGET_OS_SAILFISH)
         alcMakeContextCurrent(_context);
         alcProcessContext(_context);
 #endif
