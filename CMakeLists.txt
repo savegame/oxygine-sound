@@ -92,7 +92,10 @@ else(EMSCRIPTEN)
 	if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	
 		set(OXYGINESOUND_LIBS oxygine-sound -lopenal tremor -logg)
+	elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
+		find_library(OPENAL_LIBRARY OpenAL)
+		set(OXYGINESOUND_LIBS oxygine-sound tremor)
 	else()
 
 		set(LIBOGG libogg_static)
@@ -116,8 +119,9 @@ include_directories(${OXYGINESOUND_INCLUDE_DIRS})
 
 
 
-
-target_link_libraries(oxygine-sound -lopenal)
+if(NOT DEFINED TARGET_OS_MAC)
+	target_link_libraries(oxygine-sound -lopenal)
+endif()
 target_link_libraries(oxygine-sound -logg)
 
 
